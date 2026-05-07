@@ -1,0 +1,8 @@
+body {
+    background-color: rgb(155, 226, 226);
+    color: #ffffff;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
