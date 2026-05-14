@@ -49,3 +49,23 @@ button {
 button:hover {
     background-color: #bef2f3;
 }
+
+ul{
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    padding: 5px 0;
+    color: aqua;
+}
+ input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: 1px solid rgb(8, 99, 102);
+    background-color: rgb(246, 248, 248);
+    color: #000000;
+    box-sizing: border-box;
+ }
