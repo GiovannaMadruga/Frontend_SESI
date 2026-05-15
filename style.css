@@ -69,3 +69,10 @@ li {
     color: #000000;
     box-sizing: border-box;
  }
+
+ hr {
+    border: 0;
+    border-top: 1x solid #ffffff;
+    margin: 20px 0;
+ }
+ 
