@@ -1,6 +1,6 @@
 body {
     background-color: rgb(155, 226, 226);
-    color: #ffffff;
+    color: #000000;
     font-family: 'Segoe UI', sans-serif;
     display: flex;
     justify-content: center;
@@ -22,8 +22,8 @@ h1 {
 }
 
 h3{
-    color: rgb(251, 252, 252);
-    border-bottom: 1px solid #ffffff;
+    color: rgb(255, 255, 255);
+    border-bottom: 1px solid #dbd4d4;
     padding-bottom: 5px;
 }
 
@@ -31,7 +31,7 @@ h3{
     background: #ffffff;
     padding: 15px;
     border-radius: 5px;
-    border-left: 5px solid #ffffff;
+    border-left: 5px solid #383737;
 }
 
 button {
@@ -57,7 +57,7 @@ ul{
 
 li {
     padding: 5px 0;
-    color: aqua;
+    color: rgb(12, 12, 12);
 }
  input, select {
     width: 100%;
@@ -65,7 +65,7 @@ li {
     margin: 8px 0;
     border-radius: 5px;
     border: 1px solid rgb(8, 99, 102);
-    background-color: rgb(246, 248, 248);
+    background-color: rgb(255, 255, 255);
     color: #000000;
     box-sizing: border-box;
  }
