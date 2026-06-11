@@ -26,16 +26,22 @@
                 <option value="false"> Não possui cupom</option>
                 <option value="true"> Possui cupom(15% OFF)</option>
             </select>
+            <label for="inputVip">Cliente VIP</label>
+            <select id="inputVip">
+                <option value="false">Não</option>
+                <option value="true">Sim</option>
+            </select>
 
             <button id="btnFinalizar" onclick="executarSistemas()">Finalizar Venda</button>
-        </section>
 
         <hr> 
 
         <section id="feedback">
-            <p id="mensagem - autorizacao">Preencha os dados acima.</p>
-            <ul id="lista - estoque"></ul>
-            <div id="relatorio - final" class="card" style="display: none;">
+            <p id="mensagem-autorizacao">Preencha os dados acima.</p>
+
+            <ul id="lista-estoque"></ul>
+
+            <div id="relatorio-final" class="card" style="display:none;">
             </div>
         </section> 
     </div>
