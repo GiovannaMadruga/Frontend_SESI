@@ -75,7 +75,7 @@ function executarSistemas() {
             console.log("btn:", btn);
 
             relatorio.innerHTML = `
-            <strong>RESUMO DO PEDIDO</strong><br><br>
+            <strong>RESUMO DO PEDIDO</strong><br>
 
             Cliente: ${nome}<br>
             Status: ${vip ? "⭐ CLIENTE VIP" : "Cliente Comum"}<br>
@@ -85,10 +85,10 @@ function executarSistemas() {
             `;
 
         } else {
-            if (vip) {
+            if (vip && idade >=16) {
                 msg.innerText = `Venda autorizada: ${nome} ⭐ Cliente VIP`;
             } else {
-                msg.innerText = `Venda autorizada: ${nome}`;
+                msg.innerText = `Venda bloqueada: ${nome}`;
             }
             msg.style.color = "#ff4444";
             relatorio.style.display = "none";
