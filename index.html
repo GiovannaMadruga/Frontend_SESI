@@ -21,16 +21,35 @@
             <label for="inputValor">Valor Total</label>
             <input type="number" id="inputValor" placeholder="Valor Total (R$)" min="0" step="0.01" required>
 
-            <label for="inputCupom">Cupom</label>
+            <label for="inputCupom">Tem cupom?</label>
             <select id="inputCupom">
-                <option value="false"> Não possui cupom</option>
-                <option value="true"> Possui cupom(15% OFF)</option>
+                <option value="false"> Não </option>
+                <option value="true"> Sim(15% OFF)</option>
             </select>
-            <label for="inputVip">Cliente VIP</label>
-            <select id="inputVip">
-                <option value="false">Não</option>
-                <option value="true">Sim</option>
+
+
+            <label for="inputCadastro">Tem cadastro?</label>
+            <select id="inputCadastro" onchange="verificarCadastro()">
+                <option value="sim">Sim</option>
+                <option value="nao">Não</option>
             </select>
+
+<div id="novoCadastro" style="display:none;">
+    <label for="desejaCadastrar">Deseja fazer cadastro?</label>
+    <select id="desejaCadastrar" onchange="mostrarCamposCadastro()">
+        <option value="sim">Sim</option>
+        <option value="nao">Não</option>
+    </select>
+</div>
+
+<div id="dadosCadastro" style="display:none;">
+    <label for="inputCpf">CPF</label>
+    <input type="text" id="inputCpf">
+
+    <label for="inputEmail">E-mail</label>
+    <input type="email" id="inputEmail">
+</div>
+
 
             <button id="btnFinalizar" onclick="executarSistemas()">Finalizar Venda</button>
 
@@ -45,6 +64,7 @@
             </div>
         </section> 
     </div>
+
     <script src="script.js"></script>    
 </body>
 </html>

@@ -1,14 +1,5 @@
 function executarSistemas() {
-
-    // Tratamento de erros para o sistema não quebrar
     try {
-        // Dados de entrada
-        const inputNome = document.getElementById("inputNome"); // o VALUE é para pegar as coisas do site, ex: o nome do cliente 
-        const inputIdade = document.getElementById("inputIdade");
-        const inputValor = document.getElementById("inputValor");
-        const inputCupom = document.getElementById("inputCupom");
-        const inputVip = document.getElementById("inputVip");
-
         // Dados de saída
         const msg = document.getElementById("mensagem-autorizacao");
         const lista = document.getElementById("lista-estoque");
@@ -27,7 +18,7 @@ function executarSistemas() {
         console.log("Idade =", idade);
         const valor = parseFloat(inputValor.value);
         const cupom = inputCupom.value === "true";
-        const vip = inputVip.value === "true";
+        const cadastro = inputCadastro.value === "true"; 
 
         // Validação para campos vazios
         if (!nome || isNaN(idade) || isNaN(valor)) {
@@ -66,24 +57,6 @@ function executarSistemas() {
                 lista.appendChild(li); // Usado para adicionar um novo elemento ou texto
             });
 
-
-            //RELATÓRIO
-            relatorio.style.display = "block";
-            console.log("msg:", msg);
-            console.log("lista:", lista);
-            console.log("relatorio:", relatorio);
-            console.log("btn:", btn);
-
-            relatorio.innerHTML = `
-            <strong>RESUMO DO PEDIDO</strong><br>
-
-            Cliente: ${nome}<br>
-            Status: ${vip ? "⭐ CLIENTE VIP" : "Cliente Comum"}<br>
-            Total Original: R$ ${valor.toFixed(2)}<br>
-            Desconto Aplicado: ${desconto}%<br>
-            <strong>Total Final: R$ ${valorFinal.toFixed(2)}</strong>
-            `;
-
         } else {
             if (vip && idade >=16) {
                 msg.innerText = `Venda autorizada: ${nome} ⭐ Cliente VIP`;
@@ -99,3 +72,85 @@ function executarSistemas() {
             alert(error.message);
         }
     }
+
+    // Guarda quantas vezes cada cliente comprou
+let clientes = JSON.parse(localStorage.getItem("clientes")) || {};
+
+function executarSistemas() {
+    const nome = document.getElementById("inputNome").value.trim();
+    const idade = document.getElementById("inputIdade").value;
+    const valor = parseFloat(document.getElementById("inputValor").value);
+    const cupom = document.getElementById("inputCupom").value === "true";
+
+    const relatorio = document.getElementById("relatorio-final");
+    const mensagem = document.getElementById("mensagem-autorizacao");
+
+    if (!nome || !idade || !valor) {
+        mensagem.textContent = "Preencha todos os campos!";
+        return;
+    }
+    if (idade < 16) {
+        mensagem.textContent = `Venda bloqueada: ${nome}`;
+        mensagem.style.color = "#ff4444";
+        relatorio.style.display = "none";
+        return;
+    }
+
+    // Conta as compras do cliente
+    if (clientes[nome]) {
+        clientes[nome]++;
+    } else {
+        clientes[nome] = 1;
+    }
+
+    // Salva no navegador
+    localStorage.setItem("clientes", JSON.stringify(clientes));
+
+    // VIP a partir da segunda compra
+    let vip = clientes[nome] >= 2;
+
+    // Calcula desconto
+    let desconto = 0;
+
+    if (cupom) {
+        desconto += valor * 0.15;
+    }
+
+    if (vip) {
+        desconto += valor * 0.10;
+    }
+
+    const valorFinal = valor - desconto;
+
+    relatorio.style.display = "block";
+    relatorio.innerHTML = `
+        <h3>Relatório da Venda</h3>
+        <p><strong>Cliente:</strong> ${nome}</p>
+        <p><strong>Compras registradas:</strong> ${clientes[nome]}</p>
+        <p><strong>Status:</strong> ${vip ? "⭐ Cliente VIP" : "Cliente Comum"}</p>
+        <p><strong>Valor Original:</strong> R$ ${valor.toFixed(2)}</p>
+        <p><strong>Desconto:</strong> R$ ${desconto.toFixed(2)}</p>
+        <p><strong>Valor Final:</strong> R$ ${valorFinal.toFixed(2)}</p>
+        <p><strong>Venda finalizada com sucesso!<strong></p>
+    `;
+}
+function verificarCadastro() {
+    const cadastro = document.getElementById("inputCadastro").value;
+
+    if (cadastro === "nao") {
+        document.getElementById("novoCadastro").style.display = "block";
+    } else {
+        document.getElementById("novoCadastro").style.display = "none";
+        document.getElementById("dadosCadastro").style.display = "none";
+    }
+}
+
+function mostrarCamposCadastro() {
+    const resposta = document.getElementById("desejaCadastrar").value;
+
+    if (resposta === "sim") {
+        document.getElementById("dadosCadastro").style.display = "block";
+    } else {
+        document.getElementById("dadosCadastro").style.display = "none";
+    }
+}
